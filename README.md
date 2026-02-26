@@ -1,3 +1,4 @@
+ HEAD
 # Binance Futures Trading Bot (Testnet)
 
 ## 📌 Overview
@@ -49,3 +50,6 @@ python -m bot.cli --symbol BTCUSDT --side BUY --type MARKET --quantity 0.001
 ## 🧪 Test Evidence
 
 Logs for MARKET and LIMIT orders are included in the logs folder.
+
+# binance-futures-trading-bot
+Modular Python trading bot for Binance Futures Testnet (USDT-M) with MARKET/LIMIT orders, CLI interface, logging, and robust error handling. 0a20b9be785eb12c1c31d14af5a0b0f037b463b2
