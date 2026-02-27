@@ -17,20 +17,30 @@ if order_type == "LIMIT":
     price = st.number_input("Price", min_value=0.0, value=60000.0)
 
 if st.button("Place Order"):
-    try:
-        side = validate_side(side)
-        order_type = validate_order_type(order_type)
+    with st.spinner("Placing order..."):
+        try:
+            side = validate_side(side)
+            order_type = validate_order_type(order_type)
 
-        order = place_order(
-            symbol=symbol,
-            side=side,
-            order_type=order_type,
-            quantity=quantity,
-            price=price
-        )
+            order = place_order(
+                symbol=symbol,
+                side=side,
+                order_type=order_type,
+                quantity=quantity,
+                price=price
+            )
 
-        st.success("✅ Order placed successfully")
-        st.json(order)
+            st.success("✅ Order placed successfully")
+            st.json(order)
 
-    except Exception as e:
-        st.error(f"❌ Order failed: {e}")
+        except Exception as e:
+            error_msg = str(e)
+
+            # ⭐ Friendly message for geo restriction
+            if "restricted location" in error_msg.lower():
+                st.error(
+                    "❌ Order failed: Binance Testnet is restricted in this region.\n"
+                    "Please run the app from an allowed network."
+                )
+            else:
+                st.error(f"❌ Order failed: {error_msg}")
